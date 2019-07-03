@@ -13,7 +13,9 @@ import Auth from '../components/Auth/Auth';
 import Home from '../components/Home/Home';
 
 import MyNavbar from '../components/MyNavbar/MyNavbar';
-
+import NewScat from '../components/NewScat/NewScat';
+import EditScat from '../components/EditScat/EditScat';
+import SingleScat from '../components/SingleScat/SingleScat';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
@@ -71,6 +73,9 @@ class App extends React.Component {
                 <Switch>
                   <PublicRoute path='/auth' component={Auth} authed={authed} />
                   <PrivateRoute path='/home' component={Home} authed={authed} />
+                  <PrivateRoute path='/new' component={NewScat} authed={authed} />
+                  <PrivateRoute path='/edit/:id' component={EditScat} authed={authed} />
+                  <PrivateRoute path='/scat/:id' component={SingleScat} authed={authed} />
                   <Redirect from= "*" to="/auth" />
                 </Switch>
               </div>
