@@ -1,4 +1,14 @@
 import React from 'react';
+import { NavLink as RRNavLink } from 'react-router-dom';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -9,6 +19,14 @@ class MyNavbar extends React.Component {
     authed: PropTypes.bool.isRequired,
   }
 
+  state={
+    isOpen: false,
+  }
+
+  toggle() {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
   logMeOut = (e) => {
     e.preventDefault();
     firebase.auth().signOut();
@@ -16,26 +34,34 @@ class MyNavbar extends React.Component {
 
   render() {
     const { authed } = this.props;
+    const buildNavbar = () => {
+      if (authed) {
+        return (
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink tag={RRNavLink} to='/home'>Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RRNavLink} to='/new'>New Scat</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={this.logMeOut}>Log Out</NavLink>
+            </NavItem>
+          </Nav>
+        );
+      }
+      return <Nav className="ml-auto" navbar></Nav>;
+    };
+
     return (
   <div className="MyNavbar">
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <span className="navbar-brand" href="#">Scat Surprise</span>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-        </ul>
-        <form className="form-inline my-2 my-lg-0">
-          {authed ? (
-            <button className="btn btn-outline-success my-2 my-sm-0" onClick={this.logMeOut}>LogOut</button>
-          ) : (
-            ''
-          )}
-        </form>
-      </div>
-    </nav>
+    <Navbar color="dark" dark expand="md">
+          <NavbarBrand href="/">Scat Surprise</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            {buildNavbar()}
+            </Collapse>
+        </Navbar>
   </div>
     );
   }
