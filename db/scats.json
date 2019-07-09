@@ -1,0 +1,44 @@
+{
+  "scats": {
+    "scat1": {
+      "location": "NSS",
+      "weight": "12g",
+      "color": "brown",
+      "sampleName": "Toxic sample #1",
+      "animal": "michael",
+      "uid": "J592IegrdLXwNup445ktDxUXV8l2"
+    },
+    "scat2": {
+      "location": "Downtown",
+      "weight": "1g",
+      "color": "beige",
+      "sampleName": "Flammable",
+      "animal": "joy",
+      "uid": "12345"
+    },
+    "scat3": {
+      "location": "West-end",
+      "weight": "23g",
+      "color": "black",
+      "sampleName": "Generic",
+      "animal": "kane",
+      "uid": "J592IegrdLXwNup445ktDxUXV8l2"
+    },
+    "scat4": {
+      "location": "East nashville",
+      "weight": "2g",
+      "color": "yellow",
+      "sampleName": "Corrosive",
+      "animal": "tom",
+      "uid": "J592IegrdLXwNup445ktDxUXV8l2"
+    },
+    "scat5": {
+      "location": "Brentwood",
+      "weight": "5g",
+      "color": "green",
+      "sampleName": "Acidic",
+      "animal": "jane",
+      "uid": "12345"
+    }
+  }
+}
