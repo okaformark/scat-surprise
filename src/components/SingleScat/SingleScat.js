@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import scatsData from '../../helpers/data/scatsData';
 import 'firebase/auth';
 
@@ -25,12 +26,14 @@ class SingleScat extends React.Component {
 
   render() {
     const { scat } = this.state;
+    const editLink = `/edit/${this.props.match.params.id}`;
     return (
       <div className="SingleScat">
         <h1>{scat.samplename}</h1>
         <h2>{scat.location}</h2>
         <h3>{scat.animal}</h3>
         <h4>{scat.color}</h4>
+        <Link className="btn btn-primary" to={editLink}>Edit</Link>
         <button className="btn btn-danger" onClick={this.deleteScat}>Delete</button>
       </div>
     );
