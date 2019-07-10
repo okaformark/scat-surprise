@@ -1,5 +1,7 @@
 import React from 'react';
-
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import scatData from '../../helpers/data/scatsData';
 import './NewScat.scss';
 
 const defaultScat = {
@@ -31,12 +33,22 @@ class NewScat extends React.Component {
 
   animalChange = e => this.formFieldStringState('animal', e);
 
+  formSubmit = (e) => {
+    e.preventDefault();
+    const saveMe = { ...this.state.newScat };
+    saveMe.uid = firebase.auth().currentUser.uid;
+    console.error('sfg', saveMe);
+    scatData.postScat(saveMe)
+      .then(() => this.props.history.push('/home'))
+      .catch(err => console.error('could not save', err));
+  }
+
   render() {
     const { newScat } = this.state;
     return (
       <div className="NewScat">
         <h1>New Scat</h1>
-        <form>
+        <form onSubmit={this.formSubmit}>
           <div className="form-group">
             <label htmlFor="sampleName">Sample Name</label>
             <input
@@ -92,7 +104,7 @@ class NewScat extends React.Component {
               onChange={this.locationChange}
             />
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary">save</button>
         </form>
       </div>
     );
